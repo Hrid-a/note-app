@@ -1,0 +1,57 @@
+.title {
+    font-size: var(--text-2xl);
+    text-transform: capitalize;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
+.subTitle {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    letter-spacing: -1.2px;
+    text-align: center;
+}
+
+.form {
+    display: grid;
+    padding-block-start: 16px;
+    gap: 16px;
+    min-inline-size: 444px;
+
+    @media screen and (width < 37rem) {
+        min-inline-size: 100%;
+    }
+}
+
+.form fieldset {
+    border: 0;
+    padding: 0;
+}
+
+
+
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.link {
+    color: var(--color-gray-600);
+    font-size: var(--text-xs);
+}
+
+
+.text {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    text-align: center;
+    letter-spacing: -1.2px;
+    word-spacing: -0.6px;
+}
+
+.text .link {
+    color: var(--color-text);
+    font-size: var(--text-base);
+}

@@ -1,0 +1,5 @@
+.label {
+    display: block;
+    font-size: var(--text-sm);
+    margin-block-end: 8px;
+}

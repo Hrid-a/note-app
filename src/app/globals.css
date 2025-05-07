@@ -27,6 +27,7 @@
 
   --viewport-padding: 25px;
 }
+
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -69,7 +70,6 @@ ul, ol {
 
 html {
   color-scheme: light dark;
-  --max-container-inline-size: 790px;
 }
 
 [data-theme='light'] {
@@ -83,7 +83,7 @@ html {
 body {
   background-color: var(--color-background);
   color: var(--color-text);
-  font-family: var(--font-family);
+  font-family: var(--font-monospace);
   min-block-size: 100vh;
 }
 
@@ -91,4 +91,9 @@ main {
   max-inline-size: min(var(--max-container-inline-size), 100%);
   padding-inline: 20px;
   margin-inline: auto;
+}
+
+input:-internal-autofill-selected {
+  background-color: var(--color-background) !important;
+  color: var(--color-text) !important;
 }

@@ -1,0 +1,12 @@
+.wrapper {
+    margin-block-start: 10px;
+    display: grid;
+    gap: 10px;
+    margin-inline-start: 10px;
+}
+
+.error {
+    font-size: var(--text-sm);
+    margin-block-end: 8px;
+    color: var(--color-error-500);
+}

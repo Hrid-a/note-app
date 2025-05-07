@@ -1,0 +1,26 @@
+.wrapper {
+    background-color: var(--color-decorative);
+    display: grid;
+    place-content: center;
+    min-block-size: 100vh;
+    min-block-size: 100dvh;
+    padding: 16px;
+}
+
+.authWrapper {
+    background-color: var(--color-background);
+    padding-block: 45px;
+    padding-inline: 45px;
+    border-radius: var(--radius-lg);
+    display: grid;
+    gap: 16px;
+
+    @media screen and (width <= 400px) {
+        padding-block: 38px;
+        padding-inline: 38px;
+    }
+}
+
+.authWrapper div:first-of-type {
+    margin-inline: auto;
+}
