@@ -1,0 +1,21 @@
+.btn {
+    background-color: var(--color-primary);
+    padding-inline: 16px;
+    padding-block: 8px;
+    border-radius: var(--radius-md);
+    text-transform: capitalize;
+    transition: background-color 200ms ease-in-out;
+}
+
+.btn:hover {
+    background-color: var(--color-primary-700);
+}
+
+.btn:disabled {
+    background-color: var(--color-gray-100);
+}
+
+.btn:focus-visible {
+    outline-offset: 2px;
+    outline: 2px solid var(--color-gray-300);
+}
