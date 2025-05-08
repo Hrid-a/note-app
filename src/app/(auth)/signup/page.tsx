@@ -11,6 +11,8 @@ import Input from '@/components/Input';
 import { signup } from '@/actions/signup';
 import Label from '@/components/Label';
 import Button from '@/components/Button';
+import VisuallyHidden from '@/components/VisuallyHidden';
+import { AuthenticityTokenInput } from '@/providers/csrfProvider';
 
 
 
@@ -35,17 +37,37 @@ const Login = () => {
         </div>
         <form onSubmit={form.onSubmit} id={form.id} action={loginAction} className={style.form}  noValidate>
             <ErrorList errors={form.errors} id={form.errorId} ></ErrorList>
+            <VisuallyHidden tabIndex={-1}>
+                <Label>username</Label>
+                <Input type='text' name='username' defaultValue=''></Input>
+            </VisuallyHidden>
             <fieldset>
                 <Label htmlFor={fields.email.id}> 
                     Email Address
                 </Label>  
-                <Input  required key={fields.email.key}  name={fields.email.name} type='email' id={fields.email.id} defaultValue={fields.email.initialValue} />
-                <ErrorList errors={fields.email.errors} id={fields.email.errorId} ></ErrorList>
+                <Input  required 
+                        key={fields.email.key} 
+                        autoFocus 
+                        name={fields.email.name} 
+                        type='email' 
+                        id={fields.email.id}
+                        defaultValue={fields.email.initialValue} 
+                />
+                <ErrorList errors={fields.email.errors} 
+                    id={fields.email.errorId} >
+                </ErrorList>
                 
             </fieldset>
             <fieldset>
             <Label htmlFor={fields.password.id} > Password</Label>
-            <Input required  type='password' id={fields.password.id} name={fields.password.name} defaultValue={fields.password.initialValue} key={fields.password.key} />
+            <Input required 
+                    autoComplete='password' 
+                    type='password' 
+                    id={fields.password.id} 
+                    name={fields.password.name} 
+                    defaultValue={fields.password.initialValue} 
+                    key={fields.password.key} 
+            />
             <ErrorList errors={fields.password.errors} id={fields.password.errorId} ></ErrorList>
             </fieldset>
 
