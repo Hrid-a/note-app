@@ -12,7 +12,6 @@ import { signup } from '@/actions/signup';
 import Label from '@/components/Label';
 import Button from '@/components/Button';
 import VisuallyHidden from '@/components/VisuallyHidden';
-import { AuthenticityTokenInput } from '@/providers/csrfProvider';
 
 
 
