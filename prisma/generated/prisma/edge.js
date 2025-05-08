@@ -143,7 +143,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\ahmed\\personal\\note-app\\src\\generated\\prisma",
+      "value": "C:\\Users\\ahmed\\personal\\note-app\\prisma\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -161,10 +161,10 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../../.env",
     "schemaEnvPath": "../../../.env"
   },
-  "relativePath": "../../../prisma",
+  "relativePath": "../..",
   "clientVersion": "6.7.0",
   "engineVersion": "3cff47a7f5d65c3ea74883f1d736e41d68ce91ed",
   "datasourceNames": [
@@ -179,8 +179,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  email     String   @unique\n  username  String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  notes     Note[]\n  image     Image?\n}\n\nmodel Note {\n  id        String   @id @default(cuid())\n  title     String\n  content   String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)\n  ownerId   String\n  tags      Tag[]\n}\n\nmodel Image {\n  id          String   @id @default(cuid())\n  contentType String\n  blob        Bytes\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)\n  userId      String   @unique\n}\n\nmodel Tag {\n  id    String @id @default(cuid())\n  title String\n  notes Note[]\n}\n",
-  "inlineSchemaHash": "94675882136ee62008af6ba05f3db1445ac37a7041024de9239377f7f225096f",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  email     String   @unique\n  username  String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  notes     Note[]\n  image     Image?\n}\n\nmodel Note {\n  id        String   @id @default(cuid())\n  title     String\n  content   String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)\n  ownerId   String\n  tags      Tag[]\n}\n\nmodel Image {\n  id          String   @id @default(cuid())\n  contentType String\n  blob        Bytes\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)\n  userId      String   @unique\n}\n\nmodel Tag {\n  id    String @id @default(cuid())\n  title String\n  notes Note[]\n}\n",
+  "inlineSchemaHash": "e9d6e2d22f760e524eb334c61a8572ff243af2f6afcffb5f52b12a71d059f0eb",
   "copyEngine": true
 }
 config.dirname = '/'
