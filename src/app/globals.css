@@ -97,3 +97,7 @@ input:-internal-autofill-selected {
   background-color: var(--color-background) !important;
   color: var(--color-text) !important;
 }
+
+[tabindex='-1']{
+  outline: none;
+}
