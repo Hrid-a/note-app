@@ -16,7 +16,7 @@ import VisuallyHidden from '@/components/VisuallyHidden';
 
 
 const Login = () => {
-    const [lastResult, loginAction, isPending] = React.useActionState(login, undefined);
+    const [lastResult, loginAction] = React.useActionState(login, undefined);
     const [form, fields] = useForm({
         id:'login-form',
         lastResult,
@@ -33,7 +33,7 @@ const Login = () => {
             <h1 className={style.title}>Welcome to Note</h1>
             <p className={style.subTitle} >Please log in to continue</p>
         </div>
-        <form onSubmit={form.onSubmit} id={form.id} action={loginAction} className={style.form}  noValidate>
+        <form onSubmit={form.onSubmit} id={form.id} action={loginAction} className={style.form}  noValidate={form.noValidate} >
             <ErrorList errors={form.errors} id={form.errorId} ></ErrorList>
             <VisuallyHidden tabIndex={-1}>
                 <Label>username</Label>
@@ -56,7 +56,7 @@ const Login = () => {
             <ErrorList errors={fields.password.errors} id={fields.password.errorId} ></ErrorList>
             </fieldset>
 
-            <Button type='submit' disabled={isPending ? true : false}> Login</Button>
+            <Button type='submit' intent='primary'> Login</Button>
 
         </form>
         <Seperator />

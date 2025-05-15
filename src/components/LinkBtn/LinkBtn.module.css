@@ -1,0 +1,21 @@
+.wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-radius: var(--radius-md);
+    padding-block: 10px;
+    padding-inline: calc(12rem / 16);
+    text-decoration: none;
+    text-transform: capitalize;
+    color: var(--color-text);
+    transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.wrapper:hover {
+    background-color: var(--color-gray-100);
+    color: var(--color-text);
+}
+
+.wrapper:hover svg:first-of-type {
+    color: var(--color-primary);
+}

@@ -1,22 +1,44 @@
-.btn {
-    background-color: var(--color-primary);
+.base {
     padding-inline: 16px;
     padding-block: 8px;
     border-radius: var(--radius-md);
     text-transform: capitalize;
     transition: background-color 200ms ease-in-out;
+    background-color: inherit;
 }
 
-.btn:hover {
-    background-color: var(--color-primary-700);
+.primary {
+    background-color: var(--color-primary);
+
+    &:hover {
+        background-color: var(--color-primary-700);
+    }
 }
 
-.btn:disabled {
+.secondary {
     background-color: var(--color-gray-100);
-    color: var(--color-background);
+    color: var(--color-text);
+
+    &:hover {
+        opacity: 0.95;
+    }
 }
 
-.btn:focus-visible {
+.bordered {
+    color: var(--color-text);
+    border: 1px solid black;
+    &:hover {
+        opacity: 0.95;
+    }
+}
+
+
+
+.base:disabled {
+    opacity: 0.8;
+}
+
+.base:focus-visible {
     outline-offset: 2px;
     outline: 2px solid var(--color-gray-300);
 }

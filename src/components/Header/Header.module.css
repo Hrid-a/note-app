@@ -1,0 +1,9 @@
+.wrapper {
+    padding-block: 16px;
+    padding-inline: 32px;
+    background-color: var(--color-gray-100);
+
+    @media screen and (min-width: 50rem) {
+        display: none;
+    }
+}

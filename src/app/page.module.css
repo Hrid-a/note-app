@@ -1,10 +1,12 @@
-.page {
+.wrapper {
   display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: var(--font-geist-sans);
+  padding-inline: 16px;
+  padding-block: 16px;
+  
+}
+
+.link {
+  inline-size: fit-content;
+  text-decoration: none;
+  color: inherit;
 }

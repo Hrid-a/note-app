@@ -1,0 +1,26 @@
+.wrapper {
+    height: fit-content;
+    display: none;
+    gap: 16px;
+    padding-inline: 16px;
+    padding-block: 16px;
+    @media screen and (max-width: 67rem) {
+        border-block-end: 1px solid var(--color-gray-200);
+    }
+    @media screen and (min-width: 50rem) {
+        display: grid;
+    }
+}
+
+.auto {
+    margin-inline-start: auto;
+}
+
+.active {
+    background-color: var(--color-gray-100);
+    color: var(--color-text);
+}
+
+.activeIcon {
+    color: var(--color-primary);
+}

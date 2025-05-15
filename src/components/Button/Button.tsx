@@ -1,9 +1,22 @@
 import * as React from 'react';
 import styles from './Button.module.css'
-import clsx from 'clsx';
+import {cva, type VariantProps} from 'class-variance-authority';
 
-function Button({children, className, ...delegated}:React.PropsWithChildren<React.ButtonHTMLAttributes<HTMLButtonElement>>) {
-  return <button className={clsx(styles.btn, className)}  {...delegated}>
+
+const button = cva(styles.base, {
+  variants:{
+    intent:{
+      primary: styles.primary,
+      secondary: styles.secondary,
+      bordered: styles.bordered
+    }
+  }
+})
+
+export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>, VariantProps<typeof button> {}
+
+function Button({children, intent, className, ...delegated}:React.PropsWithChildren<ButtonProps>) {
+  return <button className={button({intent, className})}  {...delegated}>
     {children}
   </button>;
 }

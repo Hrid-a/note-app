@@ -138,14 +138,9 @@ exports.Prisma.ImageScalarFieldEnum = {
   id: 'id',
   contentType: 'contentType',
   blob: 'blob',
-  createdAt: 'createdAt',
+  createAt: 'createAt',
   updatedAt: 'updatedAt',
   userId: 'userId'
-};
-
-exports.Prisma.TagScalarFieldEnum = {
-  id: 'id',
-  title: 'title'
 };
 
 exports.Prisma.SortOrder = {
@@ -157,8 +152,7 @@ exports.Prisma.SortOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Note: 'Note',
-  Image: 'Image',
-  Tag: 'Tag'
+  Image: 'Image'
 };
 
 /**
