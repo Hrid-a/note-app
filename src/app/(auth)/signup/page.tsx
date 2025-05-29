@@ -17,7 +17,7 @@ import VisuallyHidden from '@/components/VisuallyHidden';
 
 
 const Login = () => {
-    const [lastResult, loginAction, isPending] = React.useActionState(signup, undefined);
+    const [lastResult, loginAction] = React.useActionState(signup, undefined);
     const [form, fields] = useForm({
         id:'signup-form',
         lastResult,
@@ -70,7 +70,7 @@ const Login = () => {
             <ErrorList errors={fields.password.errors} id={fields.password.errorId} ></ErrorList>
             </fieldset>
 
-            <Button  type='submit' disabled={isPending ? true : false}> Sign up</Button>
+            <Button  type='submit' > Sign up</Button>
 
         </form>
         <Seperator />

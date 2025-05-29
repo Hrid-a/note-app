@@ -24,7 +24,7 @@ function Notes({notes}: {notes: NotesProps}) {
       notes.map(({id, title, createdAt})=>{
         const date = new Date(createdAt);
         return (
-          <Link className={clsx(styles.note, pathname.slice(1) === id && styles.active)} href={`/${id}`} key={id} >
+          <Link className={clsx(styles.note, pathname.slice(1) === id && styles.active)} href={`/notes/${id}`} key={id} >
           <span className={styles.title}>{title}</span>
           <span>{date.getDate()} {' '} {monthsInAYear[date.getMonth()]} {' '} {date.getFullYear()} </span>
         </Link>

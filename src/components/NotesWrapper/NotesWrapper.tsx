@@ -10,11 +10,11 @@ async function NotesWrapper() {
   
   return (
     <div className={styles.wrapper}>
-      <LinkBtn href='/new' className={styles.flex}>
+      <LinkBtn href='/notes/new' className={styles.flex}>
         <Plus />
         <span className={styles.btnText}>create new note</span>
       </LinkBtn>
-      <LinkBtn href='/new' className={styles.smallScreenBtn}>
+      <LinkBtn href='/notes/new' className={styles.smallScreenBtn}>
         <Plus />
       </LinkBtn>
       <Notes notes={notes} />
