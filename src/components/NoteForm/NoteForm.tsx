@@ -10,14 +10,14 @@ import { parseWithZod } from '@conform-to/zod';
 import { noteSchema } from '@/actions/schema';
 import ErrorList from '../ErrorList';
 import LinkBtn from '../LinkBtn';
-import { ChevronRight } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import clsx from 'clsx';
 import NoteActions from '../NoteActions';
+import { useRouter } from 'next/navigation';
 
 function NoteForm({id, title, content, updatedAt}:{id:string, title:string, content:string, updatedAt:Date}) {
-  
+  const router = useRouter();
   const [lastResult, action] = React.useActionState(updateNote, undefined);
-  console.log({lastResult});
     const [form, fields] = useForm({
       id: 'note-form-updater',
       lastResult,
@@ -25,17 +25,25 @@ function NoteForm({id, title, content, updatedAt}:{id:string, title:string, cont
         return parseWithZod(formData, {schema: noteSchema})
       },
       shouldRevalidate: 'onBlur',
-      shouldValidate: 'onInput',
       defaultValue:{
         title,
         content
       }
     })
   
+    React.useEffect(() => {
+      if(!lastResult) return;
+      console.log('last result runs after dlelete and this is wrong');
+        if (lastResult?.status === 'success') {
+          router.push(`/notes`);
+          router.refresh();
+        }
+      }, [lastResult, router]);
+
   return <>
-  <div className={clsx(styles.flex, styles.mobileActions)}>
+    <div className={clsx(styles.flex, styles.mobileActions)}>
           <LinkBtn href='/notes' className={clsx(styles.flex, styles.text, styles.grow )}>
-            <ChevronRight />
+            <ChevronLeft size={16} />
             <span>go back</span>
           </LinkBtn>
 
@@ -47,8 +55,8 @@ function NoteForm({id, title, content, updatedAt}:{id:string, title:string, cont
           <Button form={form.id} type='submit' className={styles.primary}>
             save note
           </Button>
-        </div>
-    <form onSubmit={form.onSubmit} id={form.id} action={action} noValidate={form.noValidate} className={styles.note}>
+    </div>
+    <form key={form.key} id={form.id} action={action} onSubmit={form.onSubmit} noValidate={form.noValidate} className={styles.note}>
         <NoteHeader  date={updatedAt} >
           <Input name={fields.title.name}  key={fields.title.key} required type='text' className={styles.title} defaultValue={typeof fields.title?.initialValue === 'string' ? fields.title.initialValue : title} id={fields.title.id} />
           <ErrorList errors={fields.title.errors} id={fields.title.errorId} ></ErrorList>
@@ -60,7 +68,7 @@ function NoteForm({id, title, content, updatedAt}:{id:string, title:string, cont
         </form>
         <ErrorList errors={form.errors} id={form.errorId} ></ErrorList>
         <div className={styles.noteActions}>
-          <Button form={form.id}  type='submit' intent='primary'>save note</Button>
+          <Button form={form.id}  type='submit'  intent='primary'>save note</Button>
           <Button form={form.id} type='reset' intent='secondary' >cancel</Button>
         </div>
   </>;

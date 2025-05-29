@@ -3,8 +3,9 @@ import React from 'react'
 import styles from './page.module.css'
 import UpperHeader from '@/components/UpperHeader';
 import Header from '@/components/Header';
+import NotesWrapper from '@/components/NotesWrapper';
 
-async function layout({children, content}: Readonly<{children: React.ReactNode; content: React.ReactNode}>) {
+async function layout({children}: Readonly<{children: React.ReactNode;}>) {
   return (
     <div className={styles.wrapper}>
         <DesktopSideBar />
@@ -12,8 +13,8 @@ async function layout({children, content}: Readonly<{children: React.ReactNode; 
         <section className={styles.mobile}>
             <UpperHeader />
             <article className={styles.content}>
-              {children}
-              {content}
+                <NotesWrapper />
+                {children}
             </article>
         </section>
     </div>

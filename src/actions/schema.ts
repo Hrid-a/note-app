@@ -15,10 +15,11 @@ export const signUpSchema = z.object({
 export const noteSchema = z.object({
     title: z.string().min(5, 'title is required'),
     content: z.string().min(10, 'content is required'),
+    id: z.string().optional(),
 
 })
 
 export const noteActionSchema = z.object({
-    id: z.string().uuid(),
+    id: z.string().cuid(),
     intent: z.enum(['archive', 'delete'])
 })

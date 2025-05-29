@@ -8,9 +8,12 @@ import { handleNote } from '@/actions/handle-note';
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { noteActionSchema } from '@/actions/schema';
+import ErrorList from '../ErrorList';
+import { useRouter } from 'next/navigation';
 
 function NoteActions({ className, id }: { className?: string, id?: string }) {
 
+  const router = useRouter();
   const [lastResult, action] = React.useActionState(handleNote, undefined);
   const [form, fields] = useForm({
     id: 'note-actions',
@@ -27,19 +30,31 @@ function NoteActions({ className, id }: { className?: string, id?: string }) {
 
   })
 
+  React.useEffect(() => {
+    if (lastResult?.status === 'success') {
+      router.push('/notes');
+      router.refresh();
+    }
+  }, [lastResult, router]);
+
 
   return <>
-  <form onSubmit={form.onSubmit} action={action} id={form.id} noValidate={form.noValidate} className={clsx(styles.actions, className)}>
+
+  <form key={form.key} id={form.id} onSubmit={form.onSubmit} action={action}  noValidate={form.noValidate} className={clsx(styles.actions, className)}>
+      <ErrorList errors={form.errors} id={form.errorId} ></ErrorList>
+        
         <input type='hidden' name={fields.id.name} id={fields.id.id} key={fields.id.key} defaultValue={fields.id.initialValue} />
-        <Button intent='bordered' name='intent' value='archive' className={clsx(styles.flex, styles.btn)}>
-          <Archive  size={20} />
+        <Button type='submit' form={form.id} name='intent' value='archive' intent='bordered' className={clsx(styles.flex, styles.btn)}>
+          <Archive  size={16} />
           <span>archive note</span>
         </Button>
-        <Button name='intent' value='delete' intent='bordered' className={clsx(styles.flex, styles.btn)}>
-          <Trash  size={20} />
+        <Button type='submit' form={form.id} intent='bordered' className={clsx(styles.flex, styles.btn)}>
+          <Trash  size={16} />
           <span>delete note</span>
-          </Button>
+          <input type='hidden' name='intent' value='delete' />
+        </Button>
       </form>
+
       </>;
 }
 

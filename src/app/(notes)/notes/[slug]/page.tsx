@@ -7,6 +7,7 @@ import NoteActions from '@/components/NoteActions';
 export default async function NotePage({params}:{params: Promise<{slug:string}>}) {
     const {slug} = await params;
     const note = await getNoteById({id: slug});
+
     if(!note){
       throw new Error('there is no note with this id')
     }

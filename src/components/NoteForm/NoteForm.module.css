@@ -34,7 +34,8 @@
 
 .flex {
     display: flex;
-    gap: 10px;
+    gap: 6px;
+    align-items: center;
 }
 
 
@@ -63,16 +64,13 @@
 }
 
 .auto {
-    margin-inline-start: auto;
     flex-shrink: 100000;
+    inline-size: 100px;
+    margin-inline-start: auto;
     display: flex;
-    gap: 10px;
-    
+    align-items: center;
+    justify-content: flex-end;
     @media screen and (min-width: 50rem) {
         display: none;
     }
-}
-
-.grow {
-    flex-grow: 1;
 }

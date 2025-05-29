@@ -12,6 +12,12 @@
     flex: 1;
     display: grid;
     grid-template-rows: 1fr auto;
+
+    @media screen and (min-width: 50rem) {
+        min-block-size: 91vh;
+        min-block-size: 91svh;
+    }
+
 }
 
 

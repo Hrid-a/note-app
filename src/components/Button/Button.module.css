@@ -5,6 +5,12 @@
     text-transform: capitalize;
     transition: background-color 200ms ease-in-out;
     background-color: inherit;
+
+    @media screen and (max-width: 50rem) {
+        padding-inline: 0px;
+        padding-block: 0px;
+        font-size: var(--text-xs);
+    }
 }
 
 .primary {

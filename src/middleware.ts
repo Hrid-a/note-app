@@ -10,14 +10,14 @@ const redis = new Redis({
 
 const globalLimiter = new Ratelimit({
     redis,
-    limiter: Ratelimit.slidingWindow(10, '10 s'),
+    limiter: Ratelimit.slidingWindow(130, '10 s'),
     analytics: true,
     prefix: 'ratelimit:global',
 })
 
 const apiLimiter = new Ratelimit({
     redis,
-    limiter: Ratelimit.slidingWindow(5, '10 s'),
+    limiter: Ratelimit.slidingWindow(52, '10 s'),
     analytics: true,
     prefix: 'ratelimit:api',
 })

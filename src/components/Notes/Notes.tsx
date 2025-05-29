@@ -18,7 +18,8 @@ type NotesProps = {
 function Notes({notes}: {notes: NotesProps}) {
   const pathname = usePathname();
 
-  return <div className={clsx(styles.wrapper, pathname !== '/notes' && styles.hide, pathname !== '/notes' && 'hideSection')}>
+
+  return <div className={clsx(styles.wrapper)}>
     {
       notes.map(({id, title, createdAt})=>{
         const date = new Date(createdAt);

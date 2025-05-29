@@ -14,7 +14,17 @@ export async function getAllNotes({id}:{id: string}){
 
 
 export async function getNoteById({id}:{id:string}) {
-    const note = prisma.note.findUnique({
+    if(id === 'new'){
+        return {
+            id: 'new',
+            title: '',
+            content: '',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
+    }
+    
+    const note = prisma.note.findFirst({
         where:{id},
         select:{
             id: true, title: true, content: true, createdAt: true, updatedAt: true

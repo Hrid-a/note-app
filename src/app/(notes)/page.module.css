@@ -16,5 +16,11 @@
 
 .mobile {
     padding-block-start: 0;
+}
+
+.hide {
     
+    @media screen and (max-width: 50rem) {
+        display: none;
+    }
 }

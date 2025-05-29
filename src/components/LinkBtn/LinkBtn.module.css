@@ -1,6 +1,5 @@
 .wrapper {
     display: flex;
-    gap: 10px;
     align-items: center;
     border-radius: var(--radius-md);
     padding-block: 10px;
@@ -9,12 +8,26 @@
     text-transform: capitalize;
     color: var(--color-text);
     transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
+
+    &:hover {
+        background-color: var(--color-gray-100);
+        color: var(--color-text);
+    }
+
+    @media screen and (max-width: 50rem) {
+        padding-inline: calc(8rem / 16);
+        padding-block: 5px;
+        font-size: var(--text-xs);
+
+        &:hover {
+            color: var(--color-text);
+        }
+        
+    }
+    
 }
 
-.wrapper:hover {
-    background-color: var(--color-gray-100);
-    color: var(--color-text);
-}
+
 
 .wrapper:hover svg:first-of-type {
     color: var(--color-primary);
