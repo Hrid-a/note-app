@@ -1,8 +1,14 @@
 import { PrismaClient } from "@prisma/client";
-import type { Prisma } from "@prisma/client"; // Add this import
 import chalk from 'chalk'
 import { singleton } from "./singeltion";
 
+type QueryEvent = {
+    timestamp: Date;
+    query: string;
+    params: string;
+    duration: number;
+    target: string;
+}
 
 export const prisma = singleton('prisma', ()=>{
     const logTheshold = 25;
@@ -25,7 +31,7 @@ export const prisma = singleton('prisma', ()=>{
     })
 
 
-    client.$on('query', async (e: Prisma.QueryEvent) =>{
+    client.$on('query', async (e: QueryEvent) =>{
         const duration = e.duration;
         const query = e.query;
 
