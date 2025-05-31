@@ -8,6 +8,8 @@ import styles from "./layout.module.css";
 import DesktopSideBar from "@/components/DesktopSideBar";
 import Header from "@/components/Header";
 import UpperHeader from "@/components/UpperHeader";
+import { Toaster } from "sonner";
+import ToastProvider from "@/providers/ToastProvider";
 
 
 
@@ -40,13 +42,15 @@ export default async function RootLayout({
     <html className={monospace.variable} lang="en" data-color-theme={theme} style={{...COLORS}}>
       <body>
         <div className={styles.wrapper}>
-        <DesktopSideBar />
-        <Header />
-        <section className={styles.mobile}>
-            <UpperHeader initialTheme={theme} />
-            {children}
-        </section>
-    </div>
+          <DesktopSideBar />
+          <Header />
+          <section className={styles.mobile}>
+              <UpperHeader initialTheme={theme} />
+              {children}
+          </section>
+        </div>
+        <Toaster richColors position="top-center" />
+        <ToastProvider />
       </body>
     </html>
   );

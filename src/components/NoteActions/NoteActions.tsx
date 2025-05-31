@@ -9,11 +9,11 @@ import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { noteActionSchema } from '@/actions/schema';
 import ErrorList from '../ErrorList';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 function NoteActions({ className, id }: { className?: string, id?: string }) {
 
-  const router = useRouter();
+  // const router = useRouter();
   const [lastResult, action] = React.useActionState(handleNote, undefined);
   const [form, fields] = useForm({
     id: 'note-actions',
@@ -30,12 +30,11 @@ function NoteActions({ className, id }: { className?: string, id?: string }) {
 
   })
 
-  React.useEffect(() => {
-    if (lastResult?.status === 'success') {
-      router.push('/notes');
-      router.refresh();
-    }
-  }, [lastResult, router]);
+  // React.useEffect(() => {
+  //   if (lastResult?.status === 'success') {
+  //     router.push('/notes');
+  //   }
+  // }, [lastResult, router]);
 
 
   return <>
