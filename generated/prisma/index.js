@@ -35,12 +35,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.7.0
- * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+ * Prisma Client JS version: 6.8.2
+ * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
  */
 Prisma.prismaVersion = {
-  client: "6.7.0",
-  engine: "3cff47a7f5d65c3ea74883f1d736e41d68ce91ed"
+  client: "6.8.2",
+  engine: "2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -160,22 +160,23 @@ const config = {
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
-  "clientVersion": "6.7.0",
-  "engineVersion": "3cff47a7f5d65c3ea74883f1d736e41d68ce91ed",
+  "clientVersion": "6.8.2",
+  "engineVersion": "2060c79ba17c6bb9f5823312b6f6b7f4a845738e",
   "datasourceNames": [
     "db"
   ],
   "activeProvider": "sqlite",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "file:./dev.db"
+        "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  email     String   @unique\n  username  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  notes     Note[]\n  Image     Image?\n}\n\nmodel Note {\n  id        String   @id @default(cuid())\n  title     String\n  content   String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)\n  ownerId   String\n}\n\nmodel Image {\n  id          String   @id @default(cuid())\n  contentType String\n  blob        Bytes\n  createAt    DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)\n  userId      String   @unique\n}\n",
-  "inlineSchemaHash": "dedc54eb6af73e36227382f6dd2f9e8849bffda7607a28a2f52f038de4784367",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  email     String   @unique\n  username  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  notes     Note[]\n  Image     Image?\n}\n\nmodel Note {\n  id        String   @id @default(cuid())\n  title     String\n  content   String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)\n  ownerId   String\n\n  @@index([ownerId])\n}\n\nmodel Image {\n  id          String   @id @default(cuid())\n  contentType String\n  blob        Bytes\n  createAt    DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)\n  userId      String   @unique\n}\n",
+  "inlineSchemaHash": "7a7f8da15c242c31e8b7dda20afc9d270d613b24f0272c8c6a0537e66a574e77",
   "copyEngine": true
 }
 

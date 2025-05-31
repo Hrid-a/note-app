@@ -29,6 +29,8 @@ model Note {
   updatedAt DateTime @updatedAt
   owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   ownerId   String
+
+  @@index([ownerId])
 }
 
 model Image {
