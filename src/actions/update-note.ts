@@ -5,6 +5,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { noteSchema } from "./schema";
 import { revalidatePath } from 'next/cache';
 import { prisma } from '@/utils/db.server';
+import { redirect } from 'next/navigation';
 
 
 export async function updateNote(prevState: unknown, formData: FormData) {
@@ -16,7 +17,7 @@ export async function updateNote(prevState: unknown, formData: FormData) {
         return submission.reply();
     }
 
-
+    console.log({submission});
     const {title, content, id} = submission.value;
     const note = await prisma.note.upsert({
         where:{ id },
@@ -32,11 +33,6 @@ export async function updateNote(prevState: unknown, formData: FormData) {
     })
 
     revalidatePath('/notes');
-    revalidatePath(`/${note.id}`);
-    return {
-        status: 'success',
-        id: note.id,
-    } as const;
-
+    redirect(`/notes/${note.id}`);
 
 }

@@ -3,7 +3,7 @@ import React from 'react'
 
 function error() {
   return (
-    <div>error</div>
+    <div>error while reading this note</div>
   )
 }
 

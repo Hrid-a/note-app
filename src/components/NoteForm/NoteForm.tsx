@@ -13,10 +13,8 @@ import LinkBtn from '../LinkBtn';
 import { ChevronLeft } from 'lucide-react';
 import clsx from 'clsx';
 import NoteActions from '../NoteActions';
-import { useRouter } from 'next/navigation';
 
 function NoteForm({id, title, content, updatedAt}:{id:string, title:string, content:string, updatedAt:Date}) {
-  const router = useRouter();
   const [lastResult, action] = React.useActionState(updateNote, undefined);
     const [form, fields] = useForm({
       id: 'note-form-updater',
@@ -31,14 +29,6 @@ function NoteForm({id, title, content, updatedAt}:{id:string, title:string, cont
       }
     })
   
-    React.useEffect(() => {
-      if(!lastResult) return;
-      console.log('last result runs after dlelete and this is wrong');
-        if (lastResult?.status === 'success') {
-          router.push(`/notes`);
-          router.refresh();
-        }
-      }, [lastResult, router]);
 
   return <>
     <div className={clsx(styles.flex, styles.mobileActions)}>
