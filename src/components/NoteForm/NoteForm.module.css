@@ -11,6 +11,7 @@
 .content {
     background-color: inherit;
     color: inherit;
+    padding-block: 20px;
     inline-size: 100%;
     min-block-size: 6rem;
     field-sizing: content;

@@ -1,10 +1,11 @@
-import { Settings2Icon } from 'lucide-react';
+import { LucideSettings } from 'lucide-react';
 import * as React from 'react';
 import styles from './Settings.module.css';
+import clsx from 'clsx';
 
-function Settings() {
-  return <div className={styles.wrapper}>
-    <Settings2Icon />
+function Settings({className}: {className?: string}) {
+  return <div className={clsx(styles.wrapper, className)}>
+    <LucideSettings />
   </div>;
 }
 

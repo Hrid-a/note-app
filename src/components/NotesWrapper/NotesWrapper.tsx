@@ -4,17 +4,18 @@ import { Plus } from 'lucide-react';
 import Notes from '../Notes/Notes';
 import styles from './NotesWrapper.module.css';
 import { getAllNotes } from '@/utils/queries.server';
+import clsx from 'clsx';
 
 async function NotesWrapper() {
   const notes = await getAllNotes({id: 'cmalhdv1l000legko9pj8bne0'});
   
   return (
     <div className={styles.wrapper}>
-      <LinkBtn href='/notes/new' className={styles.flex}>
+      <LinkBtn href='/notes/new' className={clsx(styles.flex, styles.primary)}>
         <Plus />
         <span className={styles.btnText}>create new note</span>
       </LinkBtn>
-      <LinkBtn href='/notes/new' className={styles.smallScreenBtn}>
+      <LinkBtn href='/notes/new' className={clsx(styles.smallScreenBtn, styles.primary)}>
         <Plus />
       </LinkBtn>
       <Notes notes={notes} />

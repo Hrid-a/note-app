@@ -23,6 +23,7 @@ export const prisma = singleton('prisma', ()=>{
         ]
     })
 
+
     client.$on('query', async (e) =>{
         const duration = e.duration;
         const query = e.query;

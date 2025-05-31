@@ -3,17 +3,21 @@ import {Archive, ChevronRight, House} from 'lucide-react'
 import Logo from '../Logo';
 import LinkBtn from '../LinkBtn';
 import styles from './DesktopSideBar.module.css'
+import clsx from 'clsx';
+import Link from 'next/link';
 
 function DesktopSideBar() {
   return <div className={styles.wrapper}>
-    <Logo />
-    <LinkBtn href='/' className={styles.active}>
+    <Link href='/'>
+      <Logo />
+    </Link>
+    <LinkBtn href='/notes' className={clsx(styles.active, styles.flex)}>
       <House className={styles.activeIcon} />
       <span>all Notes</span>
       <ChevronRight className={styles.auto} />
     </LinkBtn>
 
-    <LinkBtn href='/archive'>
+    <LinkBtn href='/archive' className={styles.flex}>
       <Archive />
       archived notes
     </LinkBtn>

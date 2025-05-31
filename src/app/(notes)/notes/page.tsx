@@ -1,7 +1,8 @@
+import styles from './notes.module.css';
 
 async function page() {
   return (
-    <p> select a note</p>
+    <p className={styles.hide}> select a note</p>
   )
 }
 

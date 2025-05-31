@@ -1,7 +1,5 @@
 .hide {
-
-    padding-inline: 20px;
-    padding-block: 60px;
+    
     @media screen and (max-width: 50rem) {
         display: none;
     }

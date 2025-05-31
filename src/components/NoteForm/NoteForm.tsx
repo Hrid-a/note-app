@@ -58,7 +58,7 @@ function NoteForm({id, title, content, updatedAt}:{id:string, title:string, cont
     </div>
     <form key={form.key} id={form.id} action={action} onSubmit={form.onSubmit} noValidate={form.noValidate} className={styles.note}>
         <NoteHeader  date={updatedAt} >
-          <Input name={fields.title.name}  key={fields.title.key} required type='text' className={styles.title} defaultValue={typeof fields.title?.initialValue === 'string' ? fields.title.initialValue : title} id={fields.title.id} />
+          <Input name={fields.title.name} autoFocus key={fields.title.key} required type='text' className={styles.title} defaultValue={typeof fields.title?.initialValue === 'string' ? fields.title.initialValue : title} id={fields.title.id} />
           <ErrorList errors={fields.title.errors} id={fields.title.errorId} ></ErrorList>
         </NoteHeader>
           <textarea name={fields.content.name} key={fields.content.key} required className={styles.content} defaultValue={typeof fields.content?.initialValue === 'string' ? fields.content.initialValue : content} id={fields.content.id} >
