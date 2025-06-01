@@ -23,7 +23,6 @@ const Login = () => {
         onValidate({formData}){
             return  parseWithZod(formData, { schema: loginSchema });
         },
-        shouldValidate: 'onBlur',
         shouldRevalidate:'onInput'
     })
 
