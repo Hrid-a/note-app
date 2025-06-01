@@ -7,7 +7,7 @@ import { getAllNotes } from '@/utils/queries.server';
 import clsx from 'clsx';
 
 async function NotesWrapper() {
-  const notes = await getAllNotes({id: 'cmalhdv1l000legko9pj8bne0'});
+  const notes = await getAllNotes();
   
   return (
     <div className={styles.wrapper}>
