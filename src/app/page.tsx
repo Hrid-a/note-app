@@ -1,14 +1,20 @@
-import Link from "next/link";
 import styles from './page.module.css';
+import DesktopSideBar from "@/components/DesktopSideBar";
+import { getUser } from '@/utils/queries.server';
+import UserCard from '@/components/UserCard';
+import { requireUser } from '@/utils/auth.server';
 
 export default async function Home() {
+  const user = await requireUser();
+  const data = await getUser({id: user?.id})
+  if(!data) return null;
 
-  // TODO: manage inactive user sessions (check if there is a session(userid) but not a user, remove cookie)
   return ( 
     <div className={styles.wrapper}>
-      this should contain the profile only and notes llink
-      <Link href={`/notes`}  className={styles.link}>all Notes</Link>
-
+      <DesktopSideBar />
+      <div className={styles.content}>
+        <UserCard user={{...data, createdAt: data.createdAt.toISOString()}} />
+      </div>
   </div>
   );
 }

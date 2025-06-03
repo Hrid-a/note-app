@@ -1,3 +1,4 @@
+'use client'
 import { logout } from '@/actions/logout';
 import * as React from 'react';
 import styles from './Logout.module.css';

@@ -1,7 +1,10 @@
 .wrapper {
   display: grid;
   padding-inline: 16px;
-  padding-block: 16px;
+
+  @media screen and (min-width: 50rem) {
+    grid-template-columns: 271px 1fr;
+  }
   
 }
 
@@ -9,4 +12,13 @@
   inline-size: fit-content;
   text-decoration: none;
   color: inherit;
+}
+
+
+.content {
+  border-inline-start: 1px solid var(--color-gray-200);
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-content: center;
 }

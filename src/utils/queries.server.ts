@@ -41,3 +41,13 @@ export async function getNoteById({id}:{id:string}) {
 
     return note;
 }
+
+
+export async function getUser({id}:{id:string}) {
+    const user = await prisma.user.findUnique({
+        where:{id},
+        select:{id: true, username: true, createdAt: true, image:{select:{id: true}}}
+    })
+    
+    return user;
+}
