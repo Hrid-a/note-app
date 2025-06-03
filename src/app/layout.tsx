@@ -31,7 +31,6 @@ export default async function RootLayout({
   const savedTheme = (await cookies()).get(COLOR_THEME_COOKIE_NAME);
   const theme: ColorTheme = savedTheme?.value as (ColorTheme) ?? 'light';
   const COLORS = theme === 'light' ? LIGHT_TOKENS : DARK_TOKENS;
-
   return (
     <html className={monospace.variable} lang="en" data-color-theme={theme} style={{...COLORS}}>
       <body>

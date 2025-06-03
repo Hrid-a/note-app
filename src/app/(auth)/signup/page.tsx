@@ -24,7 +24,6 @@ const Login = () => {
         onValidate({formData}){
             return  parseWithZod(formData, { schema: signUpSchema });
         },
-        shouldValidate: 'onBlur',
         shouldRevalidate:'onInput'
     })
 
@@ -69,8 +68,19 @@ const Login = () => {
             />
             <ErrorList errors={fields.password.errors} id={fields.password.errorId} ></ErrorList>
             </fieldset>
+            <fieldset>
+            <Label htmlFor={fields.password.id} > Password</Label>
+            <Input required 
+                    type='password' 
+                    id={fields.confirmPassword.id} 
+                    name={fields.confirmPassword.name} 
+                    defaultValue={fields.confirmPassword.initialValue} 
+                    key={fields.confirmPassword.key} 
+            />
+            <ErrorList errors={fields.confirmPassword.errors} id={fields.confirmPassword.errorId} ></ErrorList>
+            </fieldset>
 
-            <Button  type='submit' > Sign up</Button>
+            <Button  type='submit' intent='primary' > Sign up</Button>
 
         </form>
         <Seperator />

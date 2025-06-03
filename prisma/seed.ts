@@ -2,6 +2,7 @@
 import {PrismaClient} from '@prisma/client'
 import {faker} from '@faker-js/faker'
 import {UniqueEnforcer} from 'enforce-unique'
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 const emailEnforcer = new UniqueEnforcer();
@@ -38,6 +39,9 @@ async function seed() {
                         title: faker.lorem.sentence(),
                         content: faker.lorem.paragraph()
                     }))
+                },
+                password:{
+                    create: createPassword('password')
                 }
             }
         })
@@ -54,6 +58,9 @@ async function seed() {
                     title: faker.lorem.sentence(),
                     content: faker.lorem.paragraph()
                 }))
+            },
+            password:{
+                create: createPassword('ahmedlovesyou')
             }
         }
     })
@@ -68,3 +75,9 @@ seed().catch(e =>{
 }).finally(async ()=>{
     await prisma.$disconnect()
 })
+
+function createPassword(password: string | undefined = faker.internet.password()){
+    return {
+        hash: bcrypt.hashSync(password, 10)
+    }
+}

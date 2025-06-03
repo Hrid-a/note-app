@@ -10,6 +10,15 @@ export const loginSchema = z.object({
 export const signUpSchema = z.object({
     email: z.string().email(),
     password: z.string().min(8, 'password should be at least 8 characters').max(40),
+    confirmPassword: z.string().min(8, 'password should be at least 8 characters').max(40),
+}).superRefine(({confirmPassword, password}, ctx)=>{
+    if(confirmPassword !== password){
+        ctx.addIssue({
+            code: 'custom',
+            path: ['confirmPassword'],
+            message: 'Passwords do not match',
+        })
+    }
 })
 
 export const noteSchema = z.object({

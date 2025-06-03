@@ -6,26 +6,31 @@ import { parseWithZod } from "@conform-to/zod";
 import * as z from 'zod';
 import { prisma } from '@/utils/db.server';
 import { createSession } from '@/utils/session.server';
-
+import bcrypt from 'bcryptjs';
+import { requireAnonymos } from '@/utils/auth.server';
 
 
 export async function login(prevState:unknown, formData: FormData){
 
-    // const username = formData.get('username');
-
+    await requireAnonymos();
     const submission = await parseWithZod(formData,{
         schema: ()=> loginSchema.transform(async (data, ctx)=>{
 
-            const user = await prisma.user.findUnique({
+            const userWithPassword = await prisma.user.findUnique({
                 where: {
                     email: data.email
                 },
                 select: {
                     id: true,
+                    password: {
+                        select:{
+                            hash: true
+                        }
+                    },
                 }
             })
 
-            if(!user){
+            if(!userWithPassword || !userWithPassword.password){
                 ctx.addIssue({
                     code: 'custom',
                     message: 'Invalid email or password',
@@ -34,20 +39,32 @@ export async function login(prevState:unknown, formData: FormData){
                 return z.NEVER;
             }
 
-            return {...data, user}
+            const isPasswordValid = await bcrypt.compare(
+                data.password,
+                userWithPassword.password.hash
+            );
+
+            if(!isPasswordValid){
+                ctx.addIssue({
+                    code: 'custom',
+                    message: 'Invalid email or password',
+                })
+
+                return z.NEVER;
+            }
+
+            return {...data, user: {id: userWithPassword.id}}
         }),
         async: true,
     })
 
-    delete submission.payload.password; // remove password from payload
+    delete submission.payload.password; 
     
     if(submission.status !== 'success'){
-        console.log({ err: submission.error})
         return submission.reply();
     }
 
-    const {email, password, user} = submission.value;
-    console.log({email, password, user})
+    const { user} = submission.value;
 
     await createSession({
         id: user.id

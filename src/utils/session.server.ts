@@ -32,7 +32,6 @@ export async function createSession(sessionData: SessionPayload){
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
-    maxAge: 60 * 60 * 2, // 2 hours
   });
 
 }
@@ -62,7 +61,7 @@ async function decrypt(session:string | undefined =''){
       algorithms: ['HS256'],
     })
 
-    return payload;
+    return payload as {id:string} | null;
 
   } catch (error) {
     console.error('Session decryption failed:', error);
