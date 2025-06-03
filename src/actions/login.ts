@@ -7,10 +7,12 @@ import * as z from 'zod';
 import { prisma } from '@/utils/db.server';
 import { createSession } from '@/utils/session.server';
 import bcrypt from 'bcryptjs';
+import { requireAnonymos } from '@/utils/auth.server';
 
 
 export async function login(prevState:unknown, formData: FormData){
 
+    await requireAnonymos();
     const submission = await parseWithZod(formData,{
         schema: ()=> loginSchema.transform(async (data, ctx)=>{
 
