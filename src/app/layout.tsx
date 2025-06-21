@@ -4,6 +4,8 @@ import localFont from 'next/font/local';
 import { APP_DESCRIPTION, APP_TITLE, COLOR_THEME_COOKIE_NAME } from "@/utils/constants";
 import { DARK_TOKENS, LIGHT_TOKENS } from "@/utils/colors";
 import "./globals.css";
+import { Toaster } from "sonner";
+import ToastProvider from "@/providers/ToastProvider";
 
 
 
@@ -35,6 +37,8 @@ export default async function RootLayout({
     <html className={monospace.variable} lang="en" data-color-theme={theme} style={{...COLORS}}>
       <body>
         {children}
+        <Toaster richColors position="top-center" />
+        <ToastProvider />
       </body>
     </html>
   );

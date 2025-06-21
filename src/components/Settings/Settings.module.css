@@ -1,7 +1,116 @@
-.wrapper {
-    display: none;
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
 
-    @media screen and (min-width: 50rem) {
-        display: block;
-    }
+.sidebar {
+  width: 280px;
+  /* background-color: var(--color-gray-800); */
+  padding: 2rem 0;
+  border-inline-end: 1px solid var(--color-gray-700);
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  color: var(--color-gray-600);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.navItem:hover {
+  background-color: var(--color-gray-700);
+  color: var(--color-gray-100);
+}
+
+.navItem.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.navItem.active .navIcon {
+  color: var(--color-white);
+}
+
+.navIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-gray-400);
+  transition: color 0.2s ease-in-out;
+}
+
+.navItem:hover .navIcon {
+  color: var(--color-gray-200);
+}
+
+.chevronIcon {
+  width: 1rem;
+  height: 1rem;
+  margin-left: auto;
+  color: var(--color-gray-400);
+}
+
+.main {
+  flex: 1;
+  padding: 3rem;
+  max-width: 800px;
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border: none;
+  }
+
+  .navItem {
+    white-space: nowrap;
+    min-width: fit-content;
+  }
+
+  .main {
+    padding: 2rem 1rem;
+  }
+}
+
+
+.hide {
+  display: none;
+
+  @media screen and (min-width: 50rem) {
+    display: revert;
+  }
+}
+
+.mobilebtn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  @media screen and (min-width: 50rem) {
+    display: none;
+  }
 }

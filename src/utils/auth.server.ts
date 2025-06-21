@@ -19,7 +19,6 @@ export async function requireUserId({redirectTo=''}:{redirectTo?:string}={}) {
     const userId = await getUserId()
 
     if(!userId){
-        // should be redirected based on the redirectTo
         console.log(redirectTo)
         redirect('/login')
     }
@@ -29,19 +28,19 @@ export async function requireUserId({redirectTo=''}:{redirectTo?:string}={}) {
 
 export async function getUserId() {
 
-    const session = await getSession();
+    const sessionData = await getSession();
 
-    if(!session?.id) return null;
-    const user = await prisma.user.findUnique({
-        where:{id: session.id},
-        select:{id: true}
+    if(!sessionData?.id) return null;
+    const session = await prisma.session.findUnique({
+        where:{id: sessionData.id, expiredAt:{gt: new Date()}},
+        select:{ user:{select:{id: true}}}
     })
     
-    if(!user || !user?.id){
+    if(!session || !session?.user){
         throw await logout();
     }
 
-    return user.id;
+    return session.user.id;
 }
 
 export async function requireUser() {
@@ -57,4 +56,11 @@ export async function requireUser() {
     }
 
     return user;
+}
+
+export async function requireOnBoardingEmail() {
+    const session = await getSession({name:'n_onboarding'})
+    if(!session) throw redirect('/signup');
+
+    return session.id
 }

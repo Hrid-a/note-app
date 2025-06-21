@@ -8,6 +8,7 @@ import { prisma } from '@/utils/db.server';
 import { createSession } from '@/utils/session.server';
 import bcrypt from 'bcryptjs';
 import { requireAnonymos } from '@/utils/auth.server';
+import { getSessionExpirationDate } from '@/utils/lib';
 
 
 export async function login(prevState:unknown, formData: FormData){
@@ -53,7 +54,17 @@ export async function login(prevState:unknown, formData: FormData){
                 return z.NEVER;
             }
 
-            return {...data, user: {id: userWithPassword.id}}
+            const session = await prisma.session.create({
+                data:{
+                    expiredAt: getSessionExpirationDate(),
+                    userId: userWithPassword.id
+                },
+                select:{
+                    id: true, expiredAt: true
+                }
+            })
+
+            return {...data, session}
         }),
         async: true,
     })
@@ -64,10 +75,11 @@ export async function login(prevState:unknown, formData: FormData){
         return submission.reply();
     }
 
-    const { user} = submission.value;
+    const { session} = submission.value;
 
     await createSession({
-        id: user.id
+        id: session.id,
+        expiredAt: session.expiredAt
     });
 
     redirect('/');

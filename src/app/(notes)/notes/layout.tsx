@@ -5,8 +5,6 @@ import styles from './page.module.css';
 import DesktopSideBar from '@/components/DesktopSideBar';
 import Header from '@/components/Header';
 import UpperHeader from '@/components/UpperHeader';
-import { Toaster } from 'sonner';
-import ToastProvider from '@/providers/ToastProvider';
 
 
 async function NoteLayout({children}: {children: React.ReactNode}) {
@@ -24,8 +22,6 @@ return (
           {children}
         </article>
       </section>
-      <Toaster richColors position="top-center" />
-      <ToastProvider />
     </div>    
   )
 }

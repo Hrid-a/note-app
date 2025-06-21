@@ -1,11 +1,11 @@
 'use client';
 import * as React from 'react';
 import { usePathname } from 'next/navigation';
-import Settings from '../Settings';
 import styles from './UpperHeader.module.css'
 import clsx from 'clsx';
 import VisuallyHidden from '../VisuallyHidden';
 import LinkBtn from '../LinkBtn';
+import { Settings } from 'lucide-react';
 
 function UpperHeader() {
     const pathname = usePathname();
@@ -15,7 +15,7 @@ function UpperHeader() {
       <h1> all notes</h1>
       <LinkBtn  href='/settings' className={clsx(styles.auto, styles.settings)}>
         <VisuallyHidden>change settings menu</VisuallyHidden>
-        <Settings  />
+        <Settings />
       </LinkBtn>
     </div>
   </>);

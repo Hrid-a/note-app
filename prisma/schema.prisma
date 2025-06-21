@@ -19,6 +19,7 @@ model User {
   notes     Note[]
   image     Image?
   password  Password?
+  session   Session[]
 }
 
 model Note {
@@ -48,4 +49,30 @@ model Password {
   hash   String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String @unique
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  expiredAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId    String
+
+  @@index([userId])
+}
+
+model Verifaction {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  type      String
+  target    String
+  secret    String
+  algorithm String
+  digits    Int
+  period    Int
+  charSet   String
+  expiresAt DateTime
+
+  @@unique([target, type])
 }
