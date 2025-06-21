@@ -21,7 +21,7 @@ function Notes({notes}: {notes: NotesProps}) {
 
   return <div className={clsx(styles.wrapper)}>
     {
-      notes.map(({id, title, createdAt})=>{
+      notes.length ? notes.map(({id, title, createdAt})=>{
         const date = new Date(createdAt);
         return (
           <Link className={clsx(styles.note, pathname.slice(1) === id && styles.active)} href={`/notes/${id}`} key={id} >
@@ -30,6 +30,11 @@ function Notes({notes}: {notes: NotesProps}) {
         </Link>
         )
       })
+      : (
+        <div className={clsx(styles.note, styles.active)}>
+          you don&apos;t have any notes yet. Start a new note to capture your thoughts and ideas.
+          </div>
+      )
     }
   </div>;
 }

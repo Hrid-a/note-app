@@ -1,19 +1,19 @@
 'use server';
 import 'server-only';
 import { prisma } from "./db.server";
-import { getSession } from './session.server';
 import { redirect } from 'next/navigation';
+import { getUserId } from './auth.server';
 
 export async function getAllNotes(){
 
-    const session = await getSession();
+    const userId = await getUserId();
 
-    if(!session || !session.id){
+    if(!userId){
         redirect('/login');
     }
 
     const notes = await prisma.note.findMany({
-        where:{ownerId: session.id},
+        where:{ownerId: userId},
         select: {title: true, createdAt: true, id: true}
     })
 
@@ -46,7 +46,12 @@ export async function getNoteById({id}:{id:string}) {
 export async function getUser({id}:{id:string}) {
     const user = await prisma.user.findUnique({
         where:{id},
-        select:{id: true, username: true, createdAt: true, image:{select:{id: true}}}
+        select:{id: true, username: true, createdAt: true, 
+            image:{select:{id: true}}, _count:{select:{session:{
+                where:{
+                    expiredAt: {gt: new Date()}
+                }
+            }}}}
     })
     
     return user;

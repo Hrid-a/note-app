@@ -4,10 +4,12 @@ import { redirect } from "next/navigation";
 import { signUpSchema } from "./schema";
 import { parseWithZod } from "@conform-to/zod";
 import { prisma } from '@/utils/db.server';
-import * as z from 'zod';
-import bcrypt from 'bcryptjs';
-import { createSession } from '@/utils/session.server';
-import { requireAnonymos } from '@/utils/auth.server';
+import {  requireAnonymos } from '@/utils/auth.server';
+import { sendEmail } from '@/utils/email.server';
+import { generateTOTP } from '@epic-web/totp';
+import { createUrl } from '@/utils/lib';
+import { createOnBoardingSession } from '@/utils/session.server';
+import { SignupEmail } from '@/utils/emails';
 
 export async function signup(prevState:unknown, formData: FormData){
 
@@ -31,32 +33,6 @@ export async function signup(prevState:unknown, formData: FormData){
                 return;
             }
 
-        }).transform(async (data, ctx)=>{
-            const {email, password} = data;
-            const username = email.split('@')[0];
-
-            const user = await prisma.user.create({
-                data:{
-                    email,
-                    username,
-                    password: {
-                        create: {
-                            hash: await bcrypt.hash(password, 10)
-                        }
-                    }
-                },
-                select:{id: true}
-            })
-
-            if(!user){
-                ctx.addIssue({
-                    code: 'custom',
-                    message: 'An error occurred please try again later',
-                })
-                return z.NEVER;
-            }
-
-            return {...data, user}
         }),
         async: true,
     })
@@ -64,9 +40,45 @@ export async function signup(prevState:unknown, formData: FormData){
     if(submission.status !== 'success'){
         return submission.reply()
     }
-
     
-    const {user} = submission.value;
-    await createSession({id: user.id});
-    redirect('/');
+    const {email} = submission.value;
+
+    const {otp, ...otpConfig} = await generateTOTP({
+        algorithm: 'SHA-256',
+        period: 10 * 60
+    })
+
+
+    const redirectUrl =  await createUrl('/verify');
+    redirectUrl.searchParams.set('type', 'onboarding');
+    redirectUrl.searchParams.set('target', email);
+
+    const verifyUrl = new URL(redirectUrl);
+    verifyUrl.searchParams.set('code', otp);
+
+    const verifactionData = {
+        type: 'onboarding',
+        target: email,
+        ...otpConfig,
+        expiresAt: new Date(Date.now() + otpConfig.period * 1000),
+    }
+    await prisma.verifaction.upsert({
+        where: {
+            target_type: {
+                type: 'onboarding',
+                target: email
+            }
+        },
+        update: verifactionData,
+        create: verifactionData
+    })
+
+    const response = await sendEmail({to: email, subject:'Email verfication', react: SignupEmail({onboardingUrl: verifyUrl.toString(), otp})});
+
+    if(response.status !== 'success'){
+        return submission.reply({ formErrors: [response.message ?? 'please try again'] })
+    }
+    await createOnBoardingSession({id: email});
+    redirect(redirectUrl.href);
+    
 }

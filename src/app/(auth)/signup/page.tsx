@@ -16,8 +16,8 @@ import VisuallyHidden from '@/components/VisuallyHidden';
 
 
 
-const Login = () => {
-    const [lastResult, loginAction] = React.useActionState(signup, undefined);
+const SignUp = () => {
+    const [lastResult, signupAction] = React.useActionState(signup, undefined);
     const [form, fields] = useForm({
         id:'signup-form',
         lastResult,
@@ -31,9 +31,9 @@ const Login = () => {
     <>
         <div>
             <h1 className={style.title}>Welcome to Note</h1>
-            <p className={style.subTitle} >Please log in to continue</p>
+            <p className={style.subTitle} >Please Sign up</p>
         </div>
-        <form onSubmit={form.onSubmit} id={form.id} action={loginAction} className={style.form}  noValidate>
+        <form onSubmit={form.onSubmit} id={form.id} action={signupAction} className={style.form}  noValidate>
             <ErrorList errors={form.errors} id={form.errorId} ></ErrorList>
             <VisuallyHidden tabIndex={-1}>
                 <Label>username</Label>
@@ -56,32 +56,7 @@ const Login = () => {
                 </ErrorList>
                 
             </fieldset>
-            <fieldset>
-            <Label htmlFor={fields.password.id} > Password</Label>
-            <Input required 
-                    autoComplete='password' 
-                    type='password' 
-                    id={fields.password.id} 
-                    name={fields.password.name} 
-                    defaultValue={fields.password.initialValue} 
-                    key={fields.password.key} 
-            />
-            <ErrorList errors={fields.password.errors} id={fields.password.errorId} ></ErrorList>
-            </fieldset>
-            <fieldset>
-            <Label htmlFor={fields.password.id} > Password</Label>
-            <Input required 
-                    type='password' 
-                    id={fields.confirmPassword.id} 
-                    name={fields.confirmPassword.name} 
-                    defaultValue={fields.confirmPassword.initialValue} 
-                    key={fields.confirmPassword.key} 
-            />
-            <ErrorList errors={fields.confirmPassword.errors} id={fields.confirmPassword.errorId} ></ErrorList>
-            </fieldset>
-
             <Button  type='submit' intent='primary' > Sign up</Button>
-
         </form>
         <Seperator />
         {/* we could add the option to login with google */}
@@ -90,4 +65,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default SignUp

@@ -1,0 +1,116 @@
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--color-gray-500);
+  margin: 0;
+}
+
+.themeOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.themeOption {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  /* background-color: var(--color-gray-800); */
+  border: 2px solid var(--color-gray-700);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.themeOption:hover {
+  border-color: var(--color-gray-600);
+  background-color: var(--color-gray-750);
+}
+
+.themeOption.selected {
+  border-color: var(--color-primary);
+}
+
+.themeIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-gray-400);
+  flex-shrink: 0;
+}
+
+.themeContent {
+  flex: 1;
+}
+
+.themeName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 0.25rem 0;
+}
+
+.themeDescription {
+  font-size: 0.875rem;
+  color: var(--color-gray-500);
+  margin: 0;
+}
+
+.radioButton {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--color-gray-500);
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.radioButton.selected {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+}
+
+.radioButton.selected::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--color-white);
+  border-radius: 50%;
+}
+
+.applyButton {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.applyButton:hover {
+  background-color: var(--color-primary-700);
+}
+
+.applyButton:disabled {
+  background-color: var(--color-gray-600);
+  cursor: not-allowed;
+}
